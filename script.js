@@ -12,7 +12,7 @@ let setLinksToLocalStorage = (links) => {
 let listItemCreator  = (title, url, id) => {
     return `
     <div class="btn-group mt-3">
-        <a href="${url}" class="list-group-item list-group-item-action text-center p-3"><h4>${title}</h4></a>
+        <a href="${url}" target="_blank" class="list-group-item list-group-item-action text-center p-3"><h4>${title}</h4></a>
         <button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
             <span class="visually-hidden">Toggle Dropdown</span>
         </button>
