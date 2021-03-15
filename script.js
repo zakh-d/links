@@ -13,7 +13,7 @@ let listItemCreator  = (title, url, id) => {
     return `<li class="collection-item avatar">
                 <img src="https://picsum.photos/200/200/?=${id}" alt="" class="circle">
                 <span class="title">${title}</span>
-                <p><a href="${url}" target="_blank">${url}</a></p>
+                <p><a href="${url}" target="_blank">Go to</a></p>
                 <button onclick="deleteLinkHandler(this)" data-id="${id}" class="secondary-content waves-effect waves-light btn red"><i class="material-icons">delete</i></button>
             </li>`
 }
