@@ -10,16 +10,12 @@ let setLinksToLocalStorage = (links) => {
 // CREATORS
 
 let listItemCreator  = (title, url, id) => {
-    return `
-    <div class="btn-group mt-3">
-        <a href="${url}" target="_blank" class="list-group-item list-group-item-action text-center p-3"><h4>${title}</h4></a>
-        <button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="visually-hidden">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu">
-            <li><button class="dropdown-item" onclick="deleteLinkHandler(this)" data-id="${id}">Видалити</button></li>
-        </ul>
-    </div>`
+    return `<li class="collection-item avatar">
+                <img src="https://picsum.photos/200/200/?=${id}" alt="" class="circle">
+                <span class="title">${title}</span>
+                <p><a href="${url}" target="_blank">${url}</a></p>
+                <button onclick="deleteLinkHandler(this)" data-id="${id}" class="secondary-content waves-effect waves-light btn red"><i class="material-icons">delete</i></button>
+            </li>`
 }
 
 let linkCreator = (title, url) => {
@@ -31,17 +27,20 @@ let linkCreator = (title, url) => {
     return {title, url, id}
 }
 
+
+// RERENDERER
+
 let rerenderLinksList = (links) => {
     let list = document.getElementById("linksList");
     list.innerHTML = "";
 
-    if (links){
+    if (links && links.length !== 0 ){
         links.forEach(link => {
             list.innerHTML += listItemCreator(link.title, link.url, link.id)
         });
 
     }else{
-        list.innerHTML = "<h3 class='text-center text-muted'>Немає посилань :(  Додай нові!</h3>"
+        list.innerHTML = "<h3 class='centered'>Немає посилань :(  Додай нові!</h3>"
     }
 
 }
@@ -60,8 +59,6 @@ let deleteLink = (links, id) => links.filter(link => link.id != id)
 
 // Handle UI events
 
-let form = document.getElementById("addNewLinkForm");
-
 function deleteLinkHandler(elem){
     let id = elem.dataset.id
     let links = getLinks()
@@ -69,16 +66,23 @@ function deleteLinkHandler(elem){
     setLinksToLocalStorage(deleteLink(links, id));
 }
 
-form.addEventListener("submit", function(e){
-    e.preventDefault()
-    let link = linkCreator(this.title.value, this.url.value)
-    setLinksToLocalStorage(addLink(getLinks(), link))
-    this.title.value = ""
-    this.url.value = ""
-    document.getElementById("closeModal").click()
 
-} )
+$(document).ready(() => {
 
-document.addEventListener("DOMContentLoaded", () => {
+    $('.modal').modal();
+
     rerenderLinksList(getLinks());
+
+    $("#search").on("input", (e) => {
+        rerenderLinksList(getLinks().filter(l => l.title.toLowerCase().includes(e.target.value.toLowerCase())));
+    })
+
+    $('#linkCreationForm').submit(function(e) {
+        e.preventDefault();
+        const link = linkCreator(this.title.value, this.url.value);
+        setLinksToLocalStorage(addLink(getLinks(), link));
+        this.reset();
+        $('.modal').modal('close');
+        
+    });
 });

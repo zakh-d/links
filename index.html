@@ -1,54 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Your Links</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Your Links</title>
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+	<style>
+		.btn-floating {
+			position: fixed;
+			bottom: 5%;
+			right: 10%;
+
+		}
+		.centered {
+			text-align: center;
+		}
+	</style>
 </head>
+
 <body>
-    <div class="header bg-light">
-        <div class="container p-3 d-flex justify-content-between">
-          <h3>Ваші посилання</h3>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Додати
-          </button>
-      </div>
-    </div>
-    <div class="container mt-3" style="max-width: 800px">
-        <div class="list-group" id="linksList">
+
+	<nav>
+		<div class="nav-wrapper">
+			<form>
+				<div class="input-field" onsubmit="() => false">
+					<input id="search" type="search" autocomplete="off" required>
+					<label class="label-icon" for="search"><i class="material-icons">search</i></label>
+					<i class="material-icons">close</i>
+				</div>
+			</form>
+		</div>
+	</nav>
 
 
+	<div class="container mt-3" style="max-width: 800px">
+		<ul class="collection" id="linksList">
 
-        </div>
-    </div>
+		</ul>
+		
+	</div>
+
+	<a href="#formModal" class="btn-floating btn-large waves-effect waves-light red modal-trigger" >
+		<i class="large material-icons">add</i>
+	</a>
+
+	<div class="modal" id="formModal">
+		<div class="modal-content">
+			<h4>New Link</h4>
+			<form id="linkCreationForm">
+				<div class="input-field">
+					<input type="text" id="titleInput" name="title" class="validate" required>
+					<label for="titleInput">Title</label>
+				</div>
+				<div class="input-field">
+					<input type="url" id="urlInput" name="url" class="validate" required>
+					<label for="urlInput">URL</label>
+				</div>
+				<input type="submit" class="btn" >
+			</form>
+		</div>
+	</div>
 
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Нове посилання</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <form id="addNewLinkForm">
-              <div class="modal-body">
-                  <input class="form-control" type="text" name="title" value="" placeholder="Назва" autocomplete="off" required>
-                  <input class="form-control mt-3" type="url" name="url" value="" placeholder="Посилання" autocomplete="off" required>
-              </div>
-              <div class="modal-footer">
-                <button type="button" id="closeModal" class="btn btn-secondary" data-bs-dismiss="modal">Відміна</button>
-                <button type="submit" class="btn btn-primary">Додати</button>
-              </div>
-          </form>
+	<script type="text/javascript" src="script.js"></script>
 
-        </div>
-      </div>
-    </div>
-
-
-    <script type="text/javascript" src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
+
 </html>
